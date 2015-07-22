@@ -73,6 +73,10 @@ function createSuggestionStream(closeClickStream) {
                 return listUsers[Math.floor(Math.random()*listUsers.length)];
             }
         )
+        .map(function(user) {
+        	user.login = user.login + ' mapped!'
+        	return user;
+        })
         .merge(
             refreshClickStream.map(function(){ 
                 return null;

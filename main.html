@@ -51,7 +51,15 @@ var closeButton2 = document.querySelector('.close2');
 var closeButton3 = document.querySelector('.close3');
 
 var refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
-var close1ClickStream = Rx.Observable.fromEvent(closeButton1, 'click');
+var close1ClickStream = Rx.Observable.fromEvent(closeButton1, 'click')
+							.buffer(clicks.throttle(250))
+							.map(function(clickBuffer){
+								// console.log("close 1 clicked");
+								return clickBuffer.length;
+							})
+							.filter(function(length){
+								return length >= 2;
+							})
 var close2ClickStream = Rx.Observable.fromEvent(closeButton2, 'click');
 var close3ClickStream = Rx.Observable.fromEvent(closeButton3, 'click');
 

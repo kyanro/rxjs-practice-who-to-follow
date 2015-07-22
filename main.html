@@ -67,7 +67,7 @@ var responseStream = requestStream
     });
 
 function createSuggestionStream(closeClickStream) {
-    return closeClickStream.startWith('startup click')
+    return closeClickStream.startWith('startup click event')
         .combineLatest(responseStream,             
             function(click, listUsers) {
                 return listUsers[Math.floor(Math.random()*listUsers.length)];
